@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 
-function CadastroVeiculo(props) {
+function CadastroCandidato(props) {
 
   const [grauInstrucao, setGrauInstrucao] = useState("");
   const [statusInstrucao, setStatusInstrucao] = useState("");
@@ -14,7 +14,7 @@ function CadastroVeiculo(props) {
     setStatusInstrucao(event.target.value);
   };
   
-  const [veiculo, setVeiculo] = useState(props.modoEdicao ? props.veiculoEscolhido:{
+  const [candidato, setCandidato] = useState(props.modoEdicao ? props.CandidatoEscolhido:{
     codigo: 0,
     cpf: "",
     nome: "",
@@ -343,15 +343,18 @@ function CadastroVeiculo(props) {
         </Col>
 
         </Row>
-
+        <Row>
+        <Col md={7}>
         <Form.Group controlId="n_tituloeleitor">
           <Form.Label>Número do Título de Eleitor</Form.Label>
-          <Form.Control required type="text" placeholder="Digite o número do seu título de eleitor" />
+          <Form.Control required type="text" placeholder="Digite o número do seu título" />
           <Form.Control.Feedback type="invalid">
             Por favor, preencha o número do título de eleitor
           </Form.Control.Feedback>
         </Form.Group>
+        </Col>
 
+        <Col>
         <Form.Group controlId="zona">
           <Form.Label>Zona Eleitoral</Form.Label>
           <Form.Control required type="text" placeholder="Digite sua zona eleitoral" />
@@ -359,17 +362,149 @@ function CadastroVeiculo(props) {
             Por favor, preencha a zona eleitoral
           </Form.Control.Feedback>
         </Form.Group>
+        </Col>
+        </Row>
+       <Row>
+          <Col md={6}>
+            <Form.Group controlId="n_pis">
+              <Form.Label>Número do PIS</Form.Label>
+              <Form.Control required type="text" placeholder="Digite o número do seu PIS" />
+              <Form.Control.Feedback type="invalid">
+                Por favor, preencha o número do PIS
+              </Form.Control.Feedback>
+            </Form.Group>
+            </Col>
+            <Col>
+            <Form.Group controlId="cnh_num">
+              <Form.Label>Número da CNH</Form.Label>
+              <Form.Control required type="text" placeholder="Digite o número da sua CNH" />
+              <Form.Control.Feedback type="invalid">
+                Por favor, preencha o número da CNH
+              </Form.Control.Feedback>
+            </Form.Group>
+          </Col>
+          </Row>
+
+          <Row>
+          <Col>
+            <Form.Group controlId="nome_pai">
+              <Form.Label>Nome do Pai</Form.Label>
+              <Form.Control required type="text" placeholder="Digite o nome do seu pai" />
+              <Form.Control.Feedback type="invalid">
+                Por favor, preencha o nome do pai
+              </Form.Control.Feedback>
+            </Form.Group>
+            </Col>
+            <Col>
+            <Form.Group controlId="nome_mae">
+              <Form.Label>Nome da Mãe</Form.Label>
+              <Form.Control required type="text" placeholder="Digite o nome da sua mãe" />
+              <Form.Control.Feedback type="invalid">
+                Por favor, preencha o nome da mãe
+              </Form.Control.Feedback>
+            </Form.Group>
+          </Col>
+          </Row>
+        
+
+        <Row>
+          <Col>
+            <Form.Group controlId="estado_civil">
+              <Form.Label>Estado Civil</Form.Label>
+              <Form.Control as="select" required>
+                <option value="">Selecione...</option>
+                <option value="solteiro">Solteiro(a)</option>
+                <option value="casado">Casado(a)</option>
+                <option value="divorciado">Divorciado(a)</option>
+                <option value="viuvo">Viúvo(a)</option>
+              </Form.Control>
+              <Form.Control.Feedback type="invalid">
+                Por favor, preencha o estado civil
+              </Form.Control.Feedback>
+            </Form.Group>
+          </Col>
+
+          <Col md={7}>
+            <Form.Group controlId="nome_conjuge">
+              <Form.Label>Nome do Cônjuge</Form.Label>
+              <Form.Control required type="text" placeholder="Digite o nome do seu cônjuge" />
+              <Form.Control.Feedback type="invalid">
+                Por favor, preencha o nome do cônjuge
+              </Form.Control.Feedback>
+            </Form.Group>
+          </Col>
+          <Col md={2}>
+          <Form.Group controlId="sn_filhos">
+            <Form.Label>Tem Filhos?</Form.Label>
+            <Form.Control as="select" required>
+              <option value="">...</option>
+              <option value="sim">Sim</option>
+              <option value="nao">Não</option>
+            </Form.Control>
+            <Form.Control.Feedback type="invalid">
+              Por favor, informe se tem filhos
+            </Form.Control.Feedback>
+          </Form.Group>
+          </Col>
+        </Row>
+
+        <Row>
+        <Col md={6}>
+          <Form.Group controlId="tp_residencia">
+            <Form.Label>Tipo de Residência</Form.Label>
+            <Form.Control as="select" required>
+              <option value="">Selecione...</option>
+              <option value="sim">Alugada</option>
+              <option value="nao">Própria</option>
+              </Form.Control>
+            <Form.Control.Feedback type="invalid">
+              Por favor, preencha o tipo de residência
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Col>
+        </Row>
+        <Row>
+        <Col md={6}>
+          <Form.Group controlId="certidao_militar_num">
+            <Form.Label>Número da Certidão Militar</Form.Label>
+            <Form.Control required type="text" placeholder="Digite o número da sua certidão militar" />
+            <Form.Control.Feedback type="invalid">
+              Por favor, preencha o número da certidão militar
+            </Form.Control.Feedback>
+          </Form.Group>
+          </Col>
+          <Col>
+          <Form.Group controlId="serie_certidao_militar">
+            <Form.Label>Série da Certidão Militar</Form.Label>
+            <Form.Control required type="text" placeholder="Digite a série da sua certidão militar" />
+            <Form.Control.Feedback type="invalid">
+              Por favor, preencha a série da certidão militar
+            </Form.Control.Feedback>
+          </Form.Group>
+          </Col>
+          <Col>
+          <Form.Group controlId="categoria">
+            <Form.Label>Categoria</Form.Label>
+            <Form.Control required type="text" placeholder="Digite a categoria da sua certidão militar" />
+            <Form.Control.Feedback type="invalid">
+              Por favor, preencha a categoria da certidão militar
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Col>
+        </Row>
+      
+
 
       
 
       <Button variant="primary" className='mb-2 mt-2' type="submit">
         Enviar inscrição
       </Button>
-      <Button variant="warning" onClick = {props.ChamarTabelaVeiculo} className='mb-2 mt-2' type="submit">
+      <Button variant="warning" onClick = {props.ChamarDadosCandidato} className='mb-2 mt-2' type="submit">
         Voltar
       </Button>
     </Form>
   );
 }
 
-export default CadastroVeiculo;
+export default CadastroCandidato;

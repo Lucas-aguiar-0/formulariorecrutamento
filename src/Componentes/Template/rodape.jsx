@@ -3,6 +3,7 @@ import { Container, Row, Col, Image } from 'react-bootstrap';
 
 const Footer = () => {
   return (
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
     <footer>
       <Container fluid className="bg-dark text-white p-3">
         <Row>
@@ -22,6 +23,7 @@ const Footer = () => {
         </Row>
       </Container>
     </footer>
+    </div>
   );
 };
 

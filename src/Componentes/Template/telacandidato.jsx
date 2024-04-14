@@ -1,29 +1,54 @@
 import React, { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import gifOpostos from './icones/opostos.jpg';
+import urlBaseCandidato from '../../utils.js/config';
 
 
 export default function TelaRecrutamento(props) {
   const [showForm, setShowForm] = useState(false);
   const [cpf, setCpf] = useState('');
   const [vaga, setVaga] = useState('');
+  const [acao, setAcao] = useState('padrao');
+  const [mensagem, setMensagem] = useState('');
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Ver sobre desistencia
-    console.log(`CPF: ${cpf}, Vaga: ${vaga}`);
-    setShowForm(false);
+  const handleExcluirClick = () => {
+    setAcao('excluir');
+    excluirCandidato();
   };
+
+  const handleCancelarClick = () => {
+    setAcao('padrao');
+  };
+
+  const excluirCandidato = () => {
+    if(window.confirm('Confirma a Exclusão do candidato selecionado?')){
+        fetch(urlBaseCandidato, {
+            method:'DELETE',
+            headers:{ "Content-Type": 'application/json'},
+            body: JSON.stringify({
+                cpf: cpf
+            })
+        }).then((resposta)=>{
+            if(resposta.ok) return resposta.json();
+        }).then((dados)=>{
+            setMensagem(dados.mensagem);
+        }).catch((erro) =>{
+            console.log(erro);
+            setMensagem(erro.message);
+        })
+    }
+  };
+
 
   if (showForm) {
     return (
       <div>
-        
-        <Form onSubmit={handleSubmit}>
+        <p>{mensagem}</p>
+        <Form onSubmit={handleExcluirClick}>
         <Row>
           <Col>
-          <Form.Group controlId="formCpf">
-            <Form.Label>CPF</Form.Label>
+          <Form.Group controlId="Formcpf">
+            <Form.Label id="cpf" >CPF</Form.Label>
             <Form.Control type="text" placeholder="Digite seu CPF" value={cpf} onChange={(e) => setCpf(e.target.value)} required />
           </Form.Group>
           </Col>
@@ -35,16 +60,8 @@ export default function TelaRecrutamento(props) {
           </Col>
           </Row>
           <br></br>
-          <div>
-          <Row className="justify-content-center">
-          <Col xs="auto">
-          <Button variant="primary" type="submit">Confirmar Desistência</Button>
-          </Col >
-          <Col  xs="auto">
-          <Button variant="secondary" onClick={() => setShowForm(false)}>Cancelar</Button>
-          </Col>
-          </Row>
-          </div>
+          <Button variant="danger" className='mb-2 mt-2' onClick={handleExcluirClick}>Desistir de uma vaga</Button>
+          <Button variant="secondary" className='mb-2 mt-2' onClick={handleCancelarClick}>Cancelar</Button>
         </Form>
         
       </div>

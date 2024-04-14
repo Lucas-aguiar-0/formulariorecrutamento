@@ -10,7 +10,7 @@ export default function TelaRecrutamento(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Aqui você pode adicionar a lógica para lidar com a desistência da vaga
+    // Ver sobre desistencia
     console.log(`CPF: ${cpf}, Vaga: ${vaga}`);
     setShowForm(false);
   };

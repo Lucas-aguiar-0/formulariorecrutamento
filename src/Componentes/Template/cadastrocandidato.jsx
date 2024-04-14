@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
+import urlBaseCandidato from '../../utils.js/config';
+
 
 function CadastroCandidato(props) {
 
@@ -15,7 +17,6 @@ function CadastroCandidato(props) {
   };
   
   const [candidato, setCandidato] = useState(props.modoEdicao ? props.CandidatoEscolhido:{
-    codigo: 0,
     cpf: "",
     nome: "",
     numctps: "",
@@ -50,6 +51,21 @@ function CadastroCandidato(props) {
     categoria: "",
     sn_filhos: "",
 });
+
+  function enviarCandidatoBackend(){
+    fetch(urlBaseCandidato,{
+      method: 'POST',
+      headers: {'Content-Type': 'application/jason'},
+      body:JSON.stringify(candidato),
+    })
+    .then(resposta=> resposta.json())
+    .then(resposta =>{
+        alert(resposta.mensagem);
+    })
+    .catch(erro => {
+      alert('Não foi possivel enviar sua requisição.' + erro.message);
+    });
+  }
 
   const [validated, setValidated] = useState(false);
 
@@ -497,7 +513,7 @@ function CadastroCandidato(props) {
 
       
 
-      <Button variant="primary" className='mb-2 mt-2' type="submit">
+      <Button id="btcadastrar"variant="primary" className='mb-2 mt-2' type="button">
         Enviar inscrição
       </Button>
       <Button variant="warning" onClick = {props.ChamarDadosCandidato} className='mb-2 mt-2' type="submit">
